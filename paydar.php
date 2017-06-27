@@ -8,11 +8,17 @@ $group_id = $json["message"]["chat"]["id"];
 $message_in_group = $json["message"]["text"];
 $user_id = $json["message"]["from"]["id"];
 $text = "ارسال هرگونه لینک در گروه ممنوع می باشد. کاربر خاطی از گروه دیلیت می شود";
+
 if($group_id == "-1001147609116"){
-if (filter_var($message_in_group, FILTER_VALIDATE_URL)) {
-$url = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=-" .$group_id."&text=".$text;
-     file_get_contents($url);
+
+//$url1 = "https://api.telegram.org/bot".$token."/sendMessage?chat_id=-" .$group_id."&text=".$text;
+//     file_get_contents($url1);
+//     
+    if(filter_var($message_in_group, FILTER_SANITIZE_URL)){
+        
     
+    $url2 = "https://api.telegram.org/bot".$token."/kickChatMember?chat_id=-" .$group_id."&user_id=".$user_id;
+        file_get_contents($url2);
     }
-    
 }
+    
